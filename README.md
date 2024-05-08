@@ -32,6 +32,31 @@ Install dependencies by running npm install in both the root directory and the c
 To Start Server:
 `npm run start`
 
+To run the following commands to start the full project
+    - Make the bash script executable: ``` chmod +x nodeServe.sh ``` 
+    - Run the bash script: ``` ./nodeServe.sh ```
+
 Manual Testing:
 Postman was used for manual testing in this application.
 Every module has its own port.
+
+
+Key Topics
+
+The following topics were covered in this unit:
+
+- User CRUD module with SignUp and Login
+- Product CRUD module
+- Express-Gateway
+- Request method like Get, Post, Put, Delete
+- JWT authorization and authentication
+- Joi validation
+- Sequelize ORM
+- Winston error and info loggers
+- Bcrypt for password hashing and compare
+- Helmet
+- Eslint
+- PM2 for alive forever
+- Prettier for code formatter
+- Postman collection
+- Bash script

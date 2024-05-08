@@ -3,7 +3,6 @@ import bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import Store from '../model/store.model';
 import IStore from '../utilis/Istore/Istore';
-import valStore from '../validation/store.validation';
 export class StoreServices {
   public static async createNewStore(body: IStore) {
     try {
@@ -89,31 +88,7 @@ export class StoreServices {
     }
   }
 
-  // //Get All store
-  // public static async getAllStore(query: any) {
-  //   try {
-  //     const storeListing = await Store.find();
-  //     console.log(storeListing);
-
-  //     // return await Store.find()
-
-  //     const pagination = query.pagination ? parseInt(query.pagination) : 10;
-  //     // PageNumber From which Page to Start
-  //     const pageNumber = query.page ? parseInt(query.page) : 1;
-
-  //     stores
-  //       .find({})
-  //       .sort({ id: 1 })
-  //       .skip((pageNumber - 1) * pagination)
-  //       //limit is number of Records we wantt o display
-  //       .limit(pagination)
-  //       .then((data) => {});
-  //     return stores;
-  //   } catch (err: any) {
-  //     throw new Error(err.message);
-  //   }
-  // }
-
+  //get All store
   public static async getAllStore() {
     try {
       const storeListing = await Store.find();

@@ -1,6 +1,6 @@
 import joi from 'joi';
 
-const Listing = joi.object({
+const listing = joi.object({
   limit: joi.number().required(),
   page: joi.number().required(),
   sortBy: joi.string().required(),
@@ -9,7 +9,7 @@ const Listing = joi.object({
   keyword: joi.string().optional(),
 });
 
-const User = joi.object({
+const user = joi.object({
   name: joi.string().min(5).max(20).optional().messages({ 'any.required': 'Name is a required' }),
   age: joi.string().required().min(0).max(100),
   email: joi.string().email().required(),
@@ -19,7 +19,7 @@ const User = joi.object({
   role: joi.string().required(),
 });
 
-const Login = joi.object({
+const login = joi.object({
   email: joi.string().email().required(),
   password: joi.string().min(6).required(),
 });
@@ -30,16 +30,16 @@ const validationUserMiddleware = async (req: any, res: any, next: any, schema: s
     allowUnknown: false,
   };
 
-  if (schema == 'Listing') {
-    var { error } = Listing.validate(req.query, option);
+  if (schema == 'listing') {
+    var { error } = listing.validate(req.query, option);
   }
 
-  if (schema == 'User') {
-    var { error } = User.validate(req.body, option);
+  if (schema == 'user') {
+    var { error } = user.validate(req.body, option);
   }
 
-  if (schema == 'Login') {
-    var { error } = Login.validate(req.body, option);
+  if (schema == 'login') {
+    var { error } = login.validate(req.body, option);
   }
 
   if (error) {
