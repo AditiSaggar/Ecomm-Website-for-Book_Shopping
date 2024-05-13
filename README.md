@@ -16,12 +16,14 @@ Git
 Github
 =======
 ### Technologies Used:
+
 - Nodejs
 - MongoDB
 - Git
 - Github
 
 ### Features:
+
 - User authentication: customers can register, login, and manage their profile information
 - Product browsing: customers can browse products by category, filter by price or other attributes, and search for specific products
 - Shopping cart: customers can add items to their cart, edit the quantity of items, and remove items from their cart
@@ -30,11 +32,12 @@ Github
 - Admin panel: administrators can manage product inventory, view and fulfill orders, and manage customer information
 
 ### Installation and Setup Instructions
+
 Must have NodeJs installed in your machine
 Clone the repository to your local machine
 >>>>>>> master
 
-Install dependencies by running npm install in both the root directory and the client directory 
+Install dependencies by running npm install in both the root directory and the client directory
 `npm install`
 
 To Start Server:
@@ -111,6 +114,7 @@ project-root/
 
 =======
 Every module has its own port.
+<<<<<<< HEAD
 
 
 Key Topics
@@ -133,3 +137,6 @@ The following topics were covered in this unit:
 - Postman collection
 - Bash script
 >>>>>>> master
+=======
+harbaj
+>>>>>>> 5e403dd69e1c4dcf9486e0153b7d26b728423dee
