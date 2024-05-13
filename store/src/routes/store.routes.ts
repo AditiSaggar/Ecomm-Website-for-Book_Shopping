@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import express from 'express';
+=======
+import express, { Response, Request } from 'express';
+>>>>>>> master
 //import Store from "../model/store.model";
 import { StoreController } from '../controller/store.controller';
 import validationMiddleware from '../validation/store.validation';
@@ -18,10 +22,6 @@ router.get('/:id', (req, res, next) => validationMiddleware(req, res, next, 'sto
 
 ///Route to update store
 router.put('/:id', (req, res, next) => validationMiddleware(req, res, next, 'store'), StoreController.updateStore);
-
-//Routr to publishe message
-// router.post('/publishers', StoreController.publishMessage);
-router.post('/publishers', (req, res, next) => validationMiddleware(req, res, next, 'store'), StoreController.publishMessage);
 
 ///Route to delete store
 router.delete('/:id', StoreController.deleteStore);

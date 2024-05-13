@@ -2,7 +2,6 @@ import User from '../models/user.model';
 import { Request, Response } from 'express';
 import { emailSender } from '../utils/send.email/send.email';
 import { MESSAGE, STATUS_CODE, failAction, successAction } from '../utils/messages/response';
-import { error } from 'console';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import { UserServices } from '../services/user.services';

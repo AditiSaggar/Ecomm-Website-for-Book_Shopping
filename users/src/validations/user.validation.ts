@@ -20,7 +20,7 @@ const User = joi.object({
   role: joi.string().required(),
 });
 
-const Login = joi.object({
+const login = joi.object({
   email: joi.string().email().required(),
   password: joi.string().min(6).required(),
 });
@@ -44,7 +44,7 @@ const validationUserMiddleware = async (req: Request, res: Response, next: NextF
   }
 
   if (schema === 'Login') {
-    const { error: loginUserError } = Login.validate(req.body, option);
+    const { error: loginUserError } = login.validate(req.body, option);
     validationError = loginUserError || null;
   }
 
