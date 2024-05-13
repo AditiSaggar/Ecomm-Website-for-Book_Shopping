@@ -1,7 +1,7 @@
-import joi from 'joi';
+import joi, { ValidationError } from 'joi';
+import { Request, Response, NextFunction } from 'express';
 
-///
-const Listing = joi.object({
+const listing = joi.object({
   limit: joi.number().required(),
   page: joi.number().required(),
   sortBy: joi.string().required(),
@@ -11,8 +11,8 @@ const Listing = joi.object({
 });
 
 const User = joi.object({
-  name: joi.string().min(5).max(20).optional().messages({ 'any.required': 'Name is a required' }),
-  age: joi.string().required().min(0).max(100),
+  name: joi.string().min(5).max(20).optional().messages({ 'any.required': 'Name is required' }),
+  age: joi.number().required().min(0).max(100),
   email: joi.string().email().required(),
   password: joi.string().min(6).optional(),
   address: joi.string().max(30).optional(),
@@ -25,26 +25,31 @@ const Login = joi.object({
   password: joi.string().min(6).required(),
 });
 
-const validationUserMiddleware = async (req: any, res: any, next: any, schema: string) => {
+const validationUserMiddleware = async (req: Request, res: Response, next: NextFunction, schema: string) => {
   const option = {
     abortEarly: false,
     allowUnknown: false,
   };
 
-  if (schema == 'Listing') {
-    var { error } = Listing.validate(req.query, option);
+  let validationError: ValidationError | null = null;
+
+  if (schema === 'Listing') {
+    const { error: listingError } = listing.validate(req.query, option);
+    validationError = listingError || null;
   }
 
-  if (schema == 'User') {
-    var { error } = User.validate(req.body, option);
+  if (schema === 'User') {
+    const { error: userError } = User.validate(req.body, option);
+    validationError = userError || null;
   }
 
-  if (schema == 'Login') {
-    var { error } = Login.validate(req.body, option);
+  if (schema === 'Login') {
+    const { error: loginUserError } = Login.validate(req.body, option);
+    validationError = loginUserError || null;
   }
 
-  if (error) {
-    res.status(400).json({ validationError: error.details[0].message });
+  if (validationError) {
+    res.status(400).json({ validationError: validationError.details[0].message });
   } else {
     next();
   }

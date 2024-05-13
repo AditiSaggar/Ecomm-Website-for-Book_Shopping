@@ -3,6 +3,7 @@ import * as jwt from 'jsonwebtoken';
 import User from '../models/user.model';
 import IUser from '../utils/Iuser/Iuser';
 import IUserLogin from '../utils/Iuser/Iuser';
+import logger from '../utils/logger';
 
 export class UserServices {
   //Create New User
@@ -32,10 +33,9 @@ export class UserServices {
       // No need to save again since User.create() already saved the document
 
       return newUser;
-    } catch (error) {
-      // Log or return the actual error for debugging
-      console.error(error);
-      throw new Error('Failed to create user');
+    } catch (err: any) {
+      logger.error(err);
+      throw new Error(err.message);
     }
   }
 
@@ -68,9 +68,9 @@ export class UserServices {
       } else {
         return 'notExist';
       }
-    } catch (error) {
-      // Handle errors
-      throw new Error('Login failed');
+    } catch (err: any) {
+      logger.error(err);
+      throw new Error(err.message);
     }
   }
 
@@ -84,6 +84,7 @@ export class UserServices {
       }
       return findUser;
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }
@@ -106,6 +107,7 @@ export class UserServices {
       const posts = await User.aggregate([{ $sample: { size: 40 } }, { $skip: skip }, { $limit: pageSize }]);
       return posts;
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }
@@ -116,6 +118,7 @@ export class UserServices {
       const updatedUser = await User.findByIdAndUpdate(_id, { ...reqData }, { new: true, useFindAndModify: true });
       return updatedUser;
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }
@@ -139,6 +142,7 @@ export class UserServices {
         return existingUser;
       }
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }
@@ -148,6 +152,7 @@ export class UserServices {
       const findStore = await User.findOne(attributes).lean();
       return findStore;
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }
@@ -155,7 +160,8 @@ export class UserServices {
   //   try {
   //     const { email } = req.body;
   //   } catch (err: any) {
-  //     throw new Error(err.message);
-  //   }
+  //logger.error(err);
+  //throw new Error(err.message);
+
   // }
 }

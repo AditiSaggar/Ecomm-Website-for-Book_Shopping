@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import Store from '../model/store.model';
 import IStore from '../utilis/Istore/Istore';
 import { Redis } from 'ioredis';
+import logger from '../utilis/logger';
 const redisSubscriber = new Redis();
 const publisher = new Redis();
 export class StoreServices {
@@ -33,8 +34,9 @@ export class StoreServices {
         description: body.description,
       });
       return newStore.save();
-    } catch (error) {
-      throw new Error();
+    } catch (err: any) {
+      logger.error(err);
+      throw new Error(err.message);
     }
   }
 
@@ -80,6 +82,7 @@ export class StoreServices {
       }
       return findStore;
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }
@@ -103,6 +106,7 @@ export class StoreServices {
       const posts = await Store.aggregate([{ $sample: { size: 40 } }, { $skip: skip }, { $limit: pageSize }]);
       return posts;
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }
@@ -113,6 +117,7 @@ export class StoreServices {
       const updatedStore = await Store.findByIdAndUpdate(_id, { ...reqData }, { new: true, useFindAndModify: true });
       return updatedStore;
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }
@@ -136,6 +141,7 @@ export class StoreServices {
         return existingStore;
       }
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }
@@ -145,6 +151,7 @@ export class StoreServices {
       const findStore = await Store.findOne(attributes).lean();
       return findStore;
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }
@@ -309,6 +316,7 @@ export class StoreServices {
         }
       }
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }

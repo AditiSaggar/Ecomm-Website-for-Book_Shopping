@@ -1,6 +1,7 @@
 import Redis from 'ioredis';
 import Books from '../model/products.model';
 import IBooks from '../utilis/interface/IBooks';
+import logger from '../utilis/logger';
 // import path from 'path';
 // import redis from '../config/redis.client';
 // import redisClient from '../config/redis.client';
@@ -30,6 +31,7 @@ export class BooksServices {
       return newBook.save();
       // return newStore
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }
@@ -39,6 +41,7 @@ export class BooksServices {
       const findBook = await Books.findOne(attributes).lean();
       return findBook;
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }
@@ -52,6 +55,7 @@ export class BooksServices {
       }
       return findBook;
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }
@@ -64,8 +68,8 @@ export class BooksServices {
 
   //     return bookListing;
   //   } catch (err: any) {
-  //     throw new Error(err.message);
-  //   }
+  //logger.error(err);
+  // throw new Error(err.message);
   // }
   public static async getAllbooks(pageNumber = 1, pageSize = 10) {
     try {
@@ -73,6 +77,7 @@ export class BooksServices {
       const posts = await Books.aggregate([{ $sample: { size: 40 } }, { $skip: skip }, { $limit: pageSize }]);
       return posts;
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }
@@ -83,6 +88,7 @@ export class BooksServices {
       const updatedBook = await Books.findByIdAndUpdate(_id, { ...reqData }, { new: true, useFindAndModify: true });
       return updatedBook;
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }
@@ -109,6 +115,7 @@ export class BooksServices {
         return existingBook;
       }
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }
@@ -130,6 +137,7 @@ export class BooksServices {
       });
       return newBook.save();
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }
@@ -164,8 +172,9 @@ export class BooksServices {
   //     }
   //     return parsedMessage;
   //   } catch (err: any) {
-  //     throw new Error(err.message);
-  //   }
+  //  logger.error(err);
+  //throw new Error(err.message);
+
   // }
 
   public static async subscribeToMessages(channelName: string, message: string) {
@@ -196,6 +205,7 @@ export class BooksServices {
         }
       }
     } catch (err: any) {
+      logger.error(err);
       throw new Error(err.message);
     }
   }
