@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import express from 'express';
-=======
-import express, { Response, Request } from 'express';
->>>>>>> master
 //import Store from "../model/store.model";
 import { StoreController } from '../controller/store.controller';
 import validationMiddleware from '../validation/store.validation';
