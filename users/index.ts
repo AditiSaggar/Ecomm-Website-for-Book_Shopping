@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import dotenv, { config } from 'dotenv';
+import dotenv from 'dotenv';
 import connectDB from './src/config/db.config';
 import userRouter from './src/routes/user.routes';
 import helmet from 'helmet';
@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // API Routes: define routes for handling product-
-app.use('/api/users', userRouter);
+app.use('/v1/api/users', userRouter);
 
 //Basic route handler for the root URL ('/') which sends a simple message.
 app.get('/', (req: Request, res: Response) => {

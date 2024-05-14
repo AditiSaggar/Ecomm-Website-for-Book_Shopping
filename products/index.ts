@@ -32,7 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // API Routes: define routes for handling product-
-app.use('/api/products', productRouter);
+app.use('/v1/api/products', productRouter);
 
 //Basic route handler for the root URL ('/') which sends a simple message.
 app.get('/', (req: Request, res: Response) => {
